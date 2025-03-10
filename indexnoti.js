@@ -9,7 +9,6 @@ app.use(express.json());
 const adapters = [new EmailAdapter(), new SmsAdapter()];
 const notificationService = new NotificationService(adapters);
 
-// API para enviar notificaciones
 app.post('/notify', (req, res) => {
     const { userId, message, type } = req.body;
     notificationService.enqueueNotification(userId, message, type);

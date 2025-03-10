@@ -22,7 +22,7 @@ class NotificationService {
             if (adapter) {
                 await adapter.send(job.user_id, job.message);
 
-                // Marcar como enviada
+
                 const queryUpdate = `UPDATE notifications SET status = 'sent' WHERE id = $1;`;
                 await pool.query(queryUpdate, [job.id]);
             }

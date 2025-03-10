@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: arigatoDios
+      POSTGRES_DB: notificaciones
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  notificaciones:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USER: postgres
+      DB_HOST: db 
+      DB_NAME: notificaciones
+      DB_PASSWORD: arigatoDios
+      DB_PORT: 5432
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
